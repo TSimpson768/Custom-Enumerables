@@ -1,7 +1,7 @@
 module Enumerable
   def my_each
     if block_given?
-      length = self.length
+      length = self.length - 1
       if self.class == Hash
         keys = self.keys
         for i in 0..length do
@@ -55,7 +55,7 @@ hash_brown = {:bacon => 2,
               :black_pudding => 3,
               :haggis => 5,
               :spam => 42 }
-numbers.each {|n| puts n }
-numbers.my_each{|n| puts n}
-hash_brown.each {|k, v| puts "#{k} => #{v}"}
-hash_brown.my_each {|k, v| puts "#{k} => #{v}"}
+numbers.each {|n| p n }
+numbers.my_each{|n| p n}
+hash_brown.each {|k, v| p "#{k} => #{v}"}
+hash_brown.my_each {|k, v| p "#{k} => #{v}"}
