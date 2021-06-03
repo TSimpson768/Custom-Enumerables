@@ -1,6 +1,18 @@
 module Enumerable
   def my_each
-    
+    if block_given?
+      length = self.length
+      if self.class == Hash
+        keys = self.keys
+        for i in 0..length do
+          yield keys[i], self[keys[i]]
+        end
+      else
+        for i in 0..length do
+          yield self[i]
+        end
+      end
+    end
   end
 
   def my_each_with_index
@@ -35,3 +47,7 @@ module Enumerable
     
   end
 end
+
+numbers = [1,2,3]
+numbers.each {|n| puts n }
+numbers.my_each{|n| puts n}
