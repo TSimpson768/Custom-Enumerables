@@ -49,5 +49,13 @@ module Enumerable
 end
 
 numbers = [1,2,3]
+hash_brown = {:bacon => 2,
+              :link_sausage => 2,
+              :lorne_sausage =>1,
+              :black_pudding => 3,
+              :haggis => 5,
+              :spam => 42 }
 numbers.each {|n| puts n }
 numbers.my_each{|n| puts n}
+hash_brown.each {|k, v| puts "#{k} => #{v}"}
+hash_brown.my_each {|k, v| puts "#{k} => #{v}"}
