@@ -26,8 +26,8 @@ describe Enumerable do
       end
   
       it 'Returns an array of all elementf for which the given block is true' do
-        expected_result = select_hash.select { |key, value| value.odd? }
-        result = select_hash.my_select { |key, value| value.odd? }
+        expected_result = select_hash.to_enum.select { |pair| pair[1].odd? }
+        result = select_hash.my_select { |pair| pair[1].odd? }
         expect(result).to eq(expected_result)
         
       end
