@@ -1,17 +1,10 @@
 module Enumerable
   def my_each
-    if block_given?
-      length = self.length - 1
-      if self.class == Hash
-        keys = self.keys
-        for i in 0..length do
-          yield keys[i], self[keys[i]]
-        end
-      else
-        for i in 0..length do
-          yield self[i]
-        end
-      end
+    enum = self.to_enum
+    return unless block_given?
+
+    for i in enum do
+      yield i
     end
   end
 
