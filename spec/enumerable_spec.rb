@@ -32,7 +32,15 @@ describe Enumerable do
         
       end
     end
+  end
 
+  describe '#my_all?' do
+    context 'For an enumerable with no falsey values' do
+      subject(:all_array) { [3, 6, 9, 12, 15, 24, 30, 42, 69] }
+      it 'Retruns true if no block is given' do
+        expect(all_array).to be_my_all
+      end
+    end
 
   end
 end
