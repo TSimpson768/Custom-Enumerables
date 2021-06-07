@@ -19,18 +19,20 @@ describe Enumerable do
 
     context 'When operating on a hash' do
       subject(:select_hash) { {"a" => 1, "b" => 2, "c" => 3, "d" => 5} }
-    end
-    it 'Returns an Enumerator if no block is given' do
-      result = select_hash.my_select
-      expect(result).to be_instance_of(Enumerator)
+
+      it 'Returns an Enumerator if no block is given' do
+        result = select_hash.my_select
+        expect(result).to be_instance_of(Enumerator)
+      end
+  
+      it 'Returns an array of all elementf for which the given block is true' do
+        expected_result = select_hash.select { |key, value| value.odd? }
+        result = select_hash.my_select { |key, value| value.odd? }
+        expect(result).to eq(expected_result)
+        
+      end
     end
 
-    it 'Returns an array of all elementf for which the given block is true' do
-      expected_result = select_hash.select { |key, value| value.odd? }
-      result = select_hash.my_select { |key, value| value.odd? }
-      expect(result).to eq(expected_result)
-      
-    end
 
   end
 end
