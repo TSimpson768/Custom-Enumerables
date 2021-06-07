@@ -40,6 +40,21 @@ describe Enumerable do
       it 'Retruns true if no block is given' do
         expect(all_array).to be_my_all
       end
+
+      xit 'Returns true if the given block returns true for all members' do
+        expect(all_array).to(be_my_all { |value| value % 3 == 0})
+      end
+ 
+      xit 'Returns false if the given block is false for any member' do
+        expect(all_array).not_to(be_my_all { |value| value.even? })
+      end
+    end
+
+    context 'When the enumarable contains a falsey value' do
+      subject(:all_array_falsey) { [5, 8, 3, 2, nil, 0] }
+      xit 'Returns false when no block is given' do
+        expect(all_array_falsey).not_to be_my_all
+      end
     end
 
   end
