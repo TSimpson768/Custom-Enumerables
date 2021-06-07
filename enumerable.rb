@@ -37,18 +37,15 @@ module Enumerable
   # A recreation of Enumerable#all?. Return true if block is true for all of Enum, else return false.
   # If no block, return result of all?{|object| object}
   def my_all?
-    enum = self.to_enum
-     if block_given?
-      for object in enum do
-        return false unless yield object
-      end
-     else
-        block = lambda { |x| x }
-        for object in enum do
-          return false unless block.call(object)
-        end
-     end
-     true
+    enum = to_enum
+    if block_given?
+
+      enum.my_each { |object| return false unless yield object }
+    else
+      block = lambda { |x| x }
+      enum.my_each { |object| return false unless block.call(object) }
+    end
+    true
   end
 
   def my_any?
