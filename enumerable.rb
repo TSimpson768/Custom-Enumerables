@@ -9,21 +9,14 @@ module Enumerable
   end
 
   def my_each_with_index
+    enum = self.to_enum
     return unless block_given?
 
-    length = self.length - 1
-
-    if self.instance_of?(Hash)
-      keys = self.keys
-      pairs = []
-      keys.my_each { |key| pairs.push([key, self[key]]) }
-      for i in 0..length do
-        yield pairs[i], i
-      end
-    else
-      for i in 0..length do
-        yield self[i], i
-      end
+    index = 0
+    for object in enum do
+      yield object, index
+      index += 1
+      
     end
   end
 
