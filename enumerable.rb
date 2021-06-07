@@ -20,8 +20,18 @@ module Enumerable
     end
   end
 
+  # A recreation of Enumerable#select. 
   def my_select
-    
+    enum = self.to_enum
+    return enum unless block_given?
+
+    return_array =[]
+    for object in enum do
+      if yield object
+        return_array.push(object)
+      end
+    end
+    return_array
   end
 
   def my_all?
