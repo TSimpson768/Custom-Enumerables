@@ -148,7 +148,22 @@ describe Enumerable do
       expected_result = numbers.map { |object| object * 3 }
       result = numbers.my_map { |object| object * 3 }
       expect(result).to eq(expected_result)
-      
+    end
+  end
+
+  describe '#my_inject' do
+    subject(:numbers) { [1,2,3,4,5,6,7,8,9,10,42,69] }
+    it 'Produces the same result as inject with no memory' do
+      expected_result = numbers.reduce { |memory, number| memory + number }
+      result = numbers.my_inject { |memory, number| memory + number  }
+      expect(result).to eq(expected_result)
+    end
+
+    it 'Produces the same result as inject with memory' do
+      initial_mem =  100
+      expected_result = numbers.reduce(initial_mem) { |memory, number| memory + number }
+      result = numbers.my_inject(initial_mem) { |memory, number| memory + number  }
+      expect(result).to eq(expected_result)
     end
   end
 end

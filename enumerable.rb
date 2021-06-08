@@ -1,3 +1,4 @@
+require 'pry'
 module Enumerable
   BLANK_ARGUMENT = Object.new.freeze
   def my_each
@@ -89,8 +90,12 @@ module Enumerable
     result
   end
 
-  def my_inject
-    
+  def my_inject(initial = first)
+    enum = to_enum
+    enum = drop(1).to_enum if initial == first
+    memory = initial
+    enum.my_each { |object| memory = yield memory, object }
+    memory
   end
 end
 
