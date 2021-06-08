@@ -45,7 +45,14 @@ module Enumerable
   end
 
   def my_any?
-    
+    enum = to_enum
+    if block_given?
+      enum.my_each { |object| return true if yield object }
+    else
+      block = lambda { |x| x }
+      enum.my_each { |object| return true if block.call(object) }
+    end
+    false
   end
 
   def my_none?

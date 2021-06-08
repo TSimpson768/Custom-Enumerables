@@ -66,22 +66,22 @@ describe Enumerable do
         expect(any_array).to be_my_any
       end
 
-      xit 'Returns true if any value causes the given block to return true' do
+      it 'Returns true if any value causes the given block to return true' do
         expect(any_array).to(be_my_any { |obj| obj == 700 })
       end
 
-      xit 'Returns false if the given block is false for all members' do
+      it 'Returns false if the given block is false for all members' do
         expect(any_array).not_to(be_my_any { |obj| obj == 69 })
       end
     end
 
     context 'For an array containing only falsey values' do
       subject(:any_false) { [false, false, nil] }
-      xit 'Returns false when no block is given' do
+      it 'Returns false when no block is given' do
         expect(any_false).not_to be_my_any
       end
 
-      xit 'Returns true if the given block returns true for any member' do
+      it 'Returns true if the given block returns true for any member' do
         expect(any_false).to(be_my_any(&:nil?))
       end
 
