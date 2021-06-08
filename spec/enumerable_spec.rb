@@ -179,5 +179,12 @@ describe Enumerable do
       result = numbers.my_map_proc(my_proc)
       expect(result).to eq(expected_result)
     end
+
+    it 'Does the same if given a lambda' do
+      my_lambda = lambda { |obj| obj * 4 }
+      expected_result = numbers.map { |object| object * 4 }
+      result = numbers.my_map_proc(my_lambda)
+      expect(result).to eq(expected_result)
+    end
   end
 end
