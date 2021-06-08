@@ -1,4 +1,5 @@
 module Enumerable
+  BLANK_ARGUMENT = Object.new.freeze
   def my_each
     enum = to_enum
     return unless block_given?
@@ -66,8 +67,17 @@ module Enumerable
     true
   end
 
-  def my_count
-    
+  def my_count(item = BLANK_ARGUMENT)
+    enum = to_enum
+    result = 0
+    if block_given?
+      enum.my_each { |object| result += 1 if yield object }
+    elsif item == BLANK_ARGUMENT
+      enum.my_each { |object| result += 1 if object }
+    else
+      enum.my_each { |object| result += 1 if object == item }
+    end
+    result
   end
 
   def my_map

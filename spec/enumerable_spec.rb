@@ -124,14 +124,13 @@ describe Enumerable do
       expect(result).to eq(expected_result)
     end
 
-    xit 'Returns the number of elements that fufill the given block' do
-      block = lambda {|object| object % 3 == 0 }
-      expected_result = count_array.count block
-      result = count_array.my_count block
+    it 'Returns the number of elements that fufill the given block' do
+      expected_result = count_array.count {|object| object % 3 == 0 }
+      result = count_array.my_count {|object| object % 3 == 0 }
       expect(result).to eq(expected_result)
     end
 
-    xit 'Returns the number of elements equal to the given argument' do
+    it 'Returns the number of elements equal to the given argument' do
       expected_result = count_array.count(4)
       result = count_array.my_count(4)
       expect(result).to eq(expected_result)
