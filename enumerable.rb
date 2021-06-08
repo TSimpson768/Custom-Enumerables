@@ -90,6 +90,14 @@ module Enumerable
     result
   end
 
+  def my_map_proc(proc)
+    enum = to_enum
+
+    result = []
+    enum.my_each { |object| result.push(proc.call(object)) }
+    result
+  end
+
   def my_inject(initial = first)
     enum = to_enum
     enum = drop(1).to_enum if initial == first

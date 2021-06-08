@@ -170,4 +170,14 @@ describe Enumerable do
       expect(result).to eq(40)
     end
   end
+
+  describe '#my_map_proc' do
+    subject(:numbers) { [1,2,3,4,5,6,7,8,9,10,42,69] }
+    it 'Returns an array containing the result of executing the given proc once for every element' do
+      my_proc = Proc.new {|num| num* 3 }
+      expected_result = numbers.map { |object| object * 3 }
+      result = numbers.my_map_proc(my_proc)
+      expect(result).to eq(expected_result)
+    end
+  end
 end
