@@ -115,4 +115,26 @@ describe Enumerable do
       end
     end
   end
+
+  describe '#my_count' do
+    subject(:count_array) { [3, 6, 9, 4, 2, 4, 7] }
+    it 'Return the number of elements if no block or argument is given' do
+      expected_result = count_array.count
+      result = count_array.my_count
+      expect(result).to eq(expected_result)
+    end
+
+    xit 'Returns the number of elements that fufill the given block' do
+      block = lambda {|object| object % 3 == 0 }
+      expected_result = count_array.count block
+      result = count_array.my_count block
+      expect(result).to eq(expected_result)
+    end
+
+    xit 'Returns the number of elements equal to the given argument' do
+      expected_result = count_array.count(4)
+      result = count_array.my_count(4)
+      expect(result).to eq(expected_result)
+    end
+  end
 end
