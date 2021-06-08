@@ -95,22 +95,22 @@ describe Enumerable do
         expect(none_array).not_to be_my_none
       end
 
-      xit 'Returns false if any element causes the given block to be true' do
+      it 'Returns false if any element causes the given block to be true' do
         expect(none_array).not_to(be_my_none { |object| object > 6 })
       end
 
-      xit 'Returns true if the block is false for all elements' do
+      it 'Returns true if the block is false for all elements' do
         expect(none_array).to(be_my_none { |object| object > 10 })
       end
     end
 
     context 'When an array only contains falsey elements' do
       subject(:none_false) { [false, false, false] }
-      xit 'Returns true if no block is given' do
+      it 'Returns true if no block is given' do
         expect(none_false).to be_my_none
       end
 
-      xit 'Returns true if block is false for all elements' do
+      it 'Returns true if block is false for all elements' do
         expect(none_false).to be_my_none(&:nil?)
       end
     end
