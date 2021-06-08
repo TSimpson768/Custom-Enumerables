@@ -58,4 +58,35 @@ describe Enumerable do
     end
 
   end
+
+  describe 'my_any?' do
+    context 'For an array with at least 1 truthy value' do
+      subject(:any_array) { [nil, 3, 6, 42, 700, 42069] }
+      it 'Returns true if no block is given' do
+        expect(any_array).to be_my_any
+      end
+
+      xit 'Returns true if any value causes the given block to return true' do
+        expect(any_array).to(be_my_any { |obj| obj == 700 })
+      end
+
+      xit 'Returns false if the given block is false for all members' do
+        expect(any_array).not_to(be_my_any { |obj| obj == 69 })
+      end
+    end
+
+    context 'For an array containing only falsey values' do
+      subject(:any_false) { [false, false, nil] }
+      xit 'Returns false when no block is given' do
+        expect(any_false).not_to be_my_any
+      end
+
+      xit 'Returns true if the given block returns true for any member' do
+        expect(any_false).to(be_my_any(&:nil?))
+      end
+
+    end
+
+
+  end
 end
