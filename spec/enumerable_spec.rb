@@ -13,7 +13,6 @@ describe Enumerable do
         expected_result = select_array.select { |number| number.even? }
         result = select_array.my_select { |number| number.even? }
         expect(result).to eq(expected_result)
-        
       end
     end
 
@@ -24,12 +23,11 @@ describe Enumerable do
         result = select_hash.my_select
         expect(result).to be_instance_of(Enumerator)
       end
-  
+
       it 'Returns an array of all elementf for which the given block is true' do
         expected_result = select_hash.to_enum.select { |pair| pair[1].odd? }
         result = select_hash.my_select { |pair| pair[1].odd? }
         expect(result).to eq(expected_result)
-        
       end
     end
   end
@@ -44,7 +42,7 @@ describe Enumerable do
       it 'Returns true if the given block returns true for all members' do
         expect(all_array).to(be_my_all { |value| value % 3 == 0})
       end
- 
+
       it 'Returns false if the given block is false for any member' do
         expect(all_array).not_to(be_my_all { |value| value.even? })
       end
@@ -56,7 +54,6 @@ describe Enumerable do
         expect(all_array_falsey).not_to be_my_all
       end
     end
-
   end
 
   describe 'my_any?' do
@@ -84,7 +81,6 @@ describe Enumerable do
       it 'Returns true if the given block returns true for any member' do
         expect(any_false).to(be_my_any(&:nil?))
       end
-
     end
   end
 
