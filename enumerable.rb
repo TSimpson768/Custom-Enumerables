@@ -97,6 +97,11 @@ module Enumerable
     enum.my_each { |object| memory = yield memory, object }
     memory
   end
+
+  # Multiply all the elements of an array
+  def multiply_els(array)
+    array.my_inject {|mem, num| mem*num }
+  end
 end
 
 numbers = [1,2,3]

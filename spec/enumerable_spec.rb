@@ -166,4 +166,12 @@ describe Enumerable do
       expect(result).to eq(expected_result)
     end
   end
+
+  describe '#multiply_els' do
+    subject(:array) {[2,4,5]}
+    it 'returns 40' do
+      result = array.multiply_els(array)
+      expect(result).to eq(40)
+    end
+  end
 end
