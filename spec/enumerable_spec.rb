@@ -136,4 +136,19 @@ describe Enumerable do
       expect(result).to eq(expected_result)
     end
   end
+
+  describe '#my_map' do
+    subject(:numbers) { [1,2,3,4,5,6,7,8,9,10,42,69] }
+    it 'Returns an enumerator if no block is given' do
+      result = numbers.my_map
+      expect(result).to be_instance_of(Enumerator)
+    end
+
+    it 'Returns an array containing the result of executing the given block once for every element' do
+      expected_result = numbers.map { |object| object * 3 }
+      result = numbers.my_map { |object| object * 3 }
+      expect(result).to eq(expected_result)
+      
+    end
+  end
 end

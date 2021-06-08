@@ -81,7 +81,12 @@ module Enumerable
   end
 
   def my_map
-    
+    enum = to_enum
+    return enum unless block_given?
+
+    result = []
+    enum.my_each { |object| result.push(yield object) }
+    result
   end
 
   def my_inject
