@@ -67,7 +67,7 @@ describe Enumerable do
         expect(result).to be_instance_of(Enumerator)
       end
 
-      it 'Returns an array of all elementf for which the given block is true' do
+      it 'Returns an array of all elements for which the given block is true' do
         expected_result = select_hash.to_enum.select { |pair| pair[1].odd? }
         result = select_hash.my_select { |pair| pair[1].odd? }
         expect(result).to eq(expected_result)
