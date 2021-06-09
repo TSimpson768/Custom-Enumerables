@@ -96,11 +96,15 @@ module Enumerable
     result
   end
 
-  def my_inject(initial = first)
+  def my_inject(initial = first, &symbol)
     enum = to_enum
     enum = drop(1).to_enum if initial == first
     memory = initial
-    enum.my_each { |object| memory = yield memory, object }
+    if block_given?
+      enum.my_each { |object| memory = yield memory, object }
+    else
+      enum.my_each { |object| memory = symbol.call(memory, object) }
+    end
     memory
   end
 

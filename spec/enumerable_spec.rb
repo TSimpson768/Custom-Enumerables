@@ -204,6 +204,21 @@ describe Enumerable do
       result = numbers.my_inject(initial_mem) { |memory, number| memory + number }
       expect(result).to eq(expected_result)
     end
+
+    context 'When passed a symbol' do
+      it 'Returns the same result as inject with no memory' do
+        expected_result = numbers.reduce(&:+)
+        result = numbers.my_inject(&:+)
+        expect(result).to eq(expected_result)
+      end
+
+      it 'Returns the same as inject with memory' do
+        initial_mem = 100
+        expected_result = numbers.reduce(initial_mem, &:+)
+        result = numbers.my_inject(initial_mem, &:+)
+        expect(result).to eq(expected_result)
+      end
+    end
   end
 
   describe '#multiply_els' do
