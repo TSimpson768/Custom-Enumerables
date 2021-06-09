@@ -1,11 +1,14 @@
-require 'pry'
+# frozen_string_literal: true
+
+# Extend the Enumerable module with custom methods
 module Enumerable
   BLANK_ARGUMENT = Object.new.freeze
+  DEFAULT_BLOCK =  ->(x) { x }
   def my_each
     enum = to_enum
     return unless block_given?
 
-    for i in enum do
+    for i in enum do # rubocop:disable Style/For
       yield i
     end
   end
@@ -15,10 +18,9 @@ module Enumerable
     return unless block_given?
 
     index = 0
-    for object in enum do
+    for object in enum do # rubocop:disable Style/For
       yield object, index
       index += 1
-      
     end
   end
 
@@ -128,3 +130,4 @@ numbers.each_with_index { |obj, i| puts "#{i}, #{obj}"}
 numbers.my_each_with_index { |obj, i| puts "#{i}, #{obj}"}
 hash_brown.each_with_index { |obj, i| puts "#{i}, #{obj}"}
 hash_brown.my_each_with_index { |obj, i| puts "#{i}, #{obj}"}
+
