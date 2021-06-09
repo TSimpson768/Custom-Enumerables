@@ -53,8 +53,7 @@ module Enumerable
     if block_given?
       enum.my_each { |object| return true if yield object }
     else
-      block = lambda { |x| x }
-      enum.my_each { |object| return true if block.call(object) }
+      enum.my_each { |object| return true if DEFAULT_BLOCK.call(object) }
     end
     false
   end
@@ -64,8 +63,7 @@ module Enumerable
     if block_given?
       enum.my_each { |object| return false if yield object }
     else
-      block = lambda { |x| x }
-      enum.my_each {|object| return false if block.call(object) }
+      enum.my_each {|object| return false if DEFAULT_BLOCK.call(object) }
     end
     true
   end
