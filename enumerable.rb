@@ -90,17 +90,11 @@ module Enumerable
     result
   end
 
-  def my_map_proc(proc = nil, lambda = nil)
+  def my_map_proc(proc = nil)
     enum = to_enum
     result = []
-    if proc
-      given_block = proc
-    elsif  lambda
-      given_block = lambda
-    else
-      given_block = Proc.new { |object| object }
-    end
-    enum.my_each { |object| result.push(given_block.call(object)) }
+    proc ||= proc { |x| x }
+    enum.my_each { |object| result.push(proc.call(object)) }
     result
   end
 
