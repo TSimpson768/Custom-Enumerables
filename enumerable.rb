@@ -39,11 +39,9 @@ module Enumerable
   def my_all?
     enum = to_enum
     if block_given?
-
       enum.my_each { |object| return false unless yield object }
     else
-      block = lambda { |x| x }
-      enum.my_each { |object| return false unless block.call(object) }
+      enum.my_each { |object| return false unless DEFAULT_BLOCK.call(object) }
     end
     true
   end
@@ -63,7 +61,7 @@ module Enumerable
     if block_given?
       enum.my_each { |object| return false if yield object }
     else
-      enum.my_each {|object| return false if DEFAULT_BLOCK.call(object) }
+      enum.my_each { |object| return false if DEFAULT_BLOCK.call(object) }
     end
     true
   end
@@ -108,7 +106,7 @@ module Enumerable
 
   # Multiply all the elements of an array
   def multiply_els(array)
-    array.my_inject {|mem, num| mem*num }
+    array.my_inject { |mem, num| mem * num }
   end
 end
 
