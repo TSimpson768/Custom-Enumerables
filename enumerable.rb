@@ -5,7 +5,7 @@ module Enumerable
   BLANK_ARGUMENT = Object.new.freeze
   DEFAULT_BLOCK =  ->(x) { x }
   def my_each
-    enum = to_enum
+    enum = to_enum(:each)
     return enum unless block_given?
 
     for i in enum do # rubocop:disable Style/For
@@ -14,7 +14,7 @@ module Enumerable
   end
 
   def my_each_with_index
-    enum = to_enum
+    enum = to_enum(:each_with_index)
     return unless block_given?
 
     index = 0
@@ -47,7 +47,7 @@ module Enumerable
   end
 
   def my_any?
-    enum = to_enum
+    enum = to_enum(:any?)
     if block_given?
       enum.my_each { |object| return true if yield object }
     else
@@ -57,7 +57,7 @@ module Enumerable
   end
 
   def my_none?
-    enum = to_enum
+    enum = to_enum(:none?)
     if block_given?
       enum.my_each { |object| return false if yield object }
     else
@@ -80,7 +80,7 @@ module Enumerable
   end
 
   def my_map
-    enum = to_enum
+    enum = to_enum(:map)
     return enum unless block_given?
 
     result = []
@@ -110,19 +110,19 @@ module Enumerable
   end
 end
 
-numbers = [1, 2, 3]
-hash_brown = { bacon: 2,
-               link_sausage: 2,
-               lorne_sausage: 1,
-               black_pudding: 3,
-               haggis: 5,
-               spam: 42 }
-numbers.each { |n| p n }
-numbers.my_each { |n| p n }
-hash_brown.each { |k, v| p "#{k} => #{v}" }
-hash_brown.my_each { |k, v| p "#{k} => #{v}" }
+# numbers = [1, 2, 3]
+# hash_brown = { bacon: 2,
+#                link_sausage: 2,
+#                lorne_sausage: 1,
+#                black_pudding: 3,
+#                haggis: 5,
+#                spam: 42 }
+# numbers.each { |n| p n }
+# numbers.my_each { |n| p n }
+# hash_brown.each { |k, v| p "#{k} => #{v}" }
+# hash_brown.my_each { |k, v| p "#{k} => #{v}" }
 
-numbers.each_with_index { |obj, i| puts "#{i}, #{obj}" }
-numbers.my_each_with_index { |obj, i| puts "#{i}, #{obj}" }
-hash_brown.each_with_index { |obj, i| puts "#{i}, #{obj}" }
-hash_brown.my_each_with_index { |obj, i| puts "#{i}, #{obj}" }
+# numbers.each_with_index { |obj, i| puts "#{i}, #{obj}" }
+# numbers.my_each_with_index { |obj, i| puts "#{i}, #{obj}" }
+# hash_brown.each_with_index { |obj, i| puts "#{i}, #{obj}" }
+# hash_brown.my_each_with_index { |obj, i| puts "#{i}, #{obj}" }
