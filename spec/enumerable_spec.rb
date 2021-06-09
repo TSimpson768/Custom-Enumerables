@@ -3,6 +3,47 @@
 require '../enumerable'
 
 describe Enumerable do
+  describe '#my_each' do
+    subject(:numbers) { [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 42, 69] }
+    it 'Returns an Enumerator when no block is given' do
+      result = numbers.my_each
+      expect(result).to be_instance_of(Enumerator)
+    end
+    context 'When a block is given' do
+      before do
+        allow(numbers).to receive(:puts)
+      end
+      it 'Executes the block once for each member' do
+        expect { |b| numbers.my_each(&b) }.to yield_successive_args(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 42, 69)
+        numbers.my_each { |number| puts number }
+      end
+
+      it 'Returns the original collection' do
+        result = numbers.my_each { |number| puts number }
+        expect(result).to equal(numbers)
+      end
+    end
+  end
+
+  describe '#my_each_with_index' do
+    subject(:numbers) { [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 42, 69] }
+    it 'Returns an Enumerator when no block is given' do
+      result = numbers.my_each
+      expect(result).to be_instance_of(Enumerator)
+    end
+    context 'When a block is given' do
+      it "Yields each member and it's index to the block" do
+        expect { |b| numbers.my_each_with_index(&b) }.to yield_successive_args([1, 0], [2, 1], [3, 2], [4, 3], [5, 4],
+                                                                               [6, 5], [7, 6], [8, 7], [9, 8], [10, 9],
+                                                                               [42, 10], [69, 11])
+      end
+
+      it 'Returns the original collection' do
+        result = numbers.my_each_with_index { |number, index| puts "#{index}, #{number}" }
+        expect(result).to equal(numbers)
+      end
+    end
+  end
   describe '#my_select' do
     context 'When operating on an array' do
       subject(:select_array) { [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] }

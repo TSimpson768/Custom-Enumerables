@@ -6,7 +6,7 @@ module Enumerable
   DEFAULT_BLOCK =  ->(x) { x }
   def my_each
     enum = to_enum
-    return unless block_given?
+    return enum unless block_given?
 
     for i in enum do # rubocop:disable Style/For
       yield i
